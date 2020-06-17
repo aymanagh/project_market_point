@@ -1,0 +1,82 @@
+{% include "base.html.twig" %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('css/homeuser/order.css') }}"/>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="{{ asset('javascript/javascript.js') }}"></script>
+{% endblock stylesheets %}
+
+{% block body %}
+
+	<br><br><br><br><br><br><br>
+
+	<div class="topnav">
+		<a class="active" href="{{ path ('homeuser')}}">Accueil</a>
+	</div>
+
+	<div class="container">
+
+		<h2>Panier</h2>
+
+		{# read and display just one flash message type #}
+		{% for message in app.flashes('error') %}
+			<div class="isa_error">
+				<i class="fa fa-check"></i>
+				{{ message }}
+			</div>
+		{% endfor %}
+		{% for message in app.flashes('success') %}
+			<div class="isa_success">
+				<i class="fa fa-times-circle"></i>
+				{{ message }}
+			</div>
+		{% endfor %}
+
+		{% if items | length > 0 %}
+			<table>
+				<thead>
+					<tr>
+						<th>Référence :</th>
+						<th>Intitulé :</th>
+						<th>Prix unitaire :</th>
+						<th>Quantité :</th>
+						<th>Prix total :</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for item in items %}
+						<td>{{ item.product.reference }}</td>
+						<td>{{ item.product.designation }}</td>
+						<td>{{ item.product.price|format_currency('EUR', locale='fr') }}</td>
+						<td>{{ item.quantity }}</td>
+						<td>{{ (item.product.price * item.quantity)|format_currency('EUR', locale='fr') }}</td>
+						<td>
+							<a href="{{ path('deleteItem', {id: item.product.id}) }}">
+								<button class="deletebtn">Supprimer</button>
+							</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+			<tfoot>
+				<tr>
+					<th colspan="3" style="text-align: right;">Prix total de la commande :
+					</th>
+					<td>{{ total|format_currency('EUR', locale='fr') }}</td>
+					<td></td>
+					<td></td>
+				</tr>
+			</tfoot>
+		</table><br>
+
+		<form name="order_product" method="POST">
+			{{ form_start(order_form) }}
+			{{ form_row(order_form.ot, {'label': 'OT :', 'attr': {'placeholder': "Saisir l'OT correspondant"}}) }}
+			<button type="submit" class="validbtn">Valider</button>
+			{{ form_end(order_form) }}
+		</form>
+	{% else %}
+		<p>Votre panier est vide</p>
+	{% endif %}
+</div>{% endblock body %}

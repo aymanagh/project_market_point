@@ -1,0 +1,35 @@
+{% include "settings/plant/index.html.twig" %}
+
+{% block body %}
+
+	<form name="new_product" class="container" method="post">
+
+		<h2>Ajout d'un atelier</h2><br>
+
+		{# read and display just one flash message type #}
+		{% for message in app.flashes('error') %}
+			<div class="isa_error">
+				<i class="fa fa-check"></i>
+				{{ message }}
+			</div>
+		{% endfor %}
+		{% for message in app.flashes('success') %}
+			<div class="isa_success">
+				<i class="fa fa-times-circle"></i>
+				{{ message }}
+			</div>
+		{% endfor %}
+
+		{{ form_start(form) }}
+
+		{{ form_row(form.name, {'label': 'Nom :', 'attr': {'placeholder': "Entrer le nom de l'atelier"}}) }}
+
+		<div class="clearfix">
+			<button type="submit" class="validbtn">Valider</button>
+		</div>
+
+		{{ form_end(form) }}
+
+	</form>
+
+{% endblock %}

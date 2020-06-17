@@ -1,0 +1,50 @@
+{% include "base.html.twig" %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('css/settings/product.css') }}"/>
+{% endblock %}
+
+{% block body %}
+
+	<br><br><br><br><br><br><br>
+
+	<div class="topnav">
+		<a class="active" href="{{ path ('homeuser')}}">Accueil</a>
+		<a href="{{ path ('addProduct')}}">Ajouter un produit</a>
+	</div>
+
+	<div class="container">
+
+		<form name="new_product" enctype="multipart/form-data" class="container" method="post">
+
+			<h2>Ajout d'une catégorie d'un produit</h2><br>
+
+			{# read and display just one flash message type #}
+			{% for message in app.flashes('error') %}
+				<div class="isa_error">
+					<i class="fa fa-check"></i>
+					{{ message }}
+				</div>
+			{% endfor %}
+			{% for message in app.flashes('success') %}
+				<div class="isa_success">
+					<i class="fa fa-times-circle"></i>
+					{{ message }}
+				</div>
+			{% endfor %}
+
+			{{ form_start(form) }}
+
+			{{ form_row(form.name, {'label': 'Intitulé :', 'attr': {'placeholder': "Entrer une catégorie de produit"}}) }}
+
+			<div class="clearfix">
+				<button type="submit" class="validbtn">Valider</button>
+			</div>
+
+			{{ form_end(form) }}
+
+		</form>
+
+	</div>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% include "base.html.twig" %}
+
+{% block title %}Paramètres
+{% endblock %}
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('css/settings/plant.css') }}"/>
+{% endblock %}
+
+{% block body %}
+
+	<br><br><br><br><br><br><br>
+
+	<div class="topnav">
+		<a class="active" href="{{ path ('homeuser')}}">Accueil</a>
+		<a href="{{ path ('plant')}}">Informations usine</a>
+		{% if access.status == 1 %}
+			<a href="{{ path ('addWorkshop')}}">Ajouter un atelier</a>
+		{% endif %}
+		<a href="{{ path ('addLine')}}">Ajouter une ligne</a>
+		<a href="{{ path ('addOp')}}">Ajouter une OP</a>
+	</div>
+
+{% endblock %}

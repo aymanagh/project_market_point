@@ -1,0 +1,59 @@
+{% include "settings/index.html.twig" %}
+
+{% block body %}
+
+	<div class="container">
+
+		<h2>Commande N°{{ order.id }}</h2>
+		
+		<table>
+			<thead>
+				<tr>
+					<th style="text-align: center">Numéro OT :</th>
+					<td>{{ order.ot }}</td>
+					<th style="text-align: center">Commandé par :</th>
+					<td>{{ order.user.lastname }}
+						{{ order.user.firstname }}</td>
+					<th style="text-align: center">Date de la commande :</th>
+					<td>{{ order.addAt|format_datetime('short', 'short', locale='fr') }}</td>
+				</tr>
+			</thead>
+		</table><br>
+
+		<table>
+			<thead>
+				<tr>
+					<th>Référence :</th>
+					<th>Intitulé :</th>
+					<th>Prix unitaire :</th>
+					<th>Quantité :</th>
+					<th>Prix total :</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for order in order.ProductQuantity %}
+					<tr>
+						<td>{{ order.product }}</td>
+						<td>{{ order.product.designation }}</td>
+						<td>{{ order.product.price|format_currency('EUR', locale='fr') }}</td>
+						<td>{{ order.quantity }}</td>
+						<td>{{ (order.product.price * order.quantity)|format_currency('EUR', locale='fr') }}</td>
+						<td></td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table><br>
+		<table>
+			<tfoot>
+				<tr>
+					<td>
+						<strong>Prix total de la commande :</strong>
+						{{ order.totalPrice|format_currency('EUR', locale='fr') }}</td>
+				</tr>
+			</tfoot>
+		</table>
+
+	</div>
+
+{% endblock %}

@@ -1,0 +1,70 @@
+{% include "base.html.twig" %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('css/settings/plant.css') }}"/>
+{% endblock %}
+
+{% block body %}
+
+	<br><br><br><br><br><br>
+
+	<div class="topnav">
+		<a class="active" href="{{ path ('homeuser')}}">Accueil</a>
+	</div>
+
+	<div class="container">
+		<table>
+			<tr>
+				<td rowspan="9"><img class="image_modal" src="{{ vich_uploader_asset(product, 'imageFile') }}"></td>
+			</tr>
+			<tr>
+				<td>
+					<strong>Référence :</strong>
+					{{ product.reference }}</td>
+			</tr>
+			<tr>
+				<td>
+					<strong>Intitulé :</strong>
+					{{ product.designation }}</td>
+			</tr>
+			<tr>
+				<td>
+					<strong>Description :</strong>
+					{{ product.description }}</td>
+			</tr>
+			<tr>
+				<td>
+					<strong>Ligne :</strong>
+					{% for product in product.productionLine %}
+						{{ product.name }}
+					{% endfor %}
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<strong>Prix :</strong>
+					{{ product.price|format_currency('EUR', locale='fr') }}
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<strong>Quantité en magasin :</strong>
+					{{ product.amount }}
+					pièces</td>
+			</tr>
+			<tr>
+				<td>
+					<strong>Seuil d'alerte :</strong>
+					{{ product.warninglevel }}
+					pièces</td>
+			</tr>
+			<tr>
+				<td>
+					<strong>En attente :</strong>
+					{{ product.waiting }}
+					pièces</td>
+			</tr>
+		</table>
+	</div>
+
+{% endblock body %}

@@ -1,0 +1,22 @@
+{% include "base.html.twig" %}
+
+{% block title %}Paramètres
+{% endblock %}
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('css/settings/settings.css') }}"/>
+{% endblock %}
+
+{% block body %}
+
+	<br><br><br><br><br><br><br>
+
+	<div class="topnav">
+		<a class="active" href="{{ path ('homeuser') }}">Accueil</a>
+		<a href="{{ path ('myaccount') }}">Mon compte</a>
+		{% if access.status == 1 or access.status == 2 %}
+			<a href="{{ path ('users') }}">Utilisateurs</a>
+			<a href="{{ path ('plant') }}">Usine</a>
+		{% endif %}
+	</div>
+
+{% endblock %}

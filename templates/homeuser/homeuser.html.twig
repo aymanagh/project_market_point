@@ -1,0 +1,391 @@
+{% include "base.html.twig" %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('css/homeuser/homeuser.css') }}"/>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="{{ asset('javascript/scroll_function.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('javascript/detail_product.js') }}"></script>
+{% endblock stylesheets %}
+
+{% block body %}
+
+	<br><br><br><br><br><br><br>
+
+	<div class="topnav">
+		<a class="active" href="{{ path ('homeuser')}}">Accueil</a>
+		{% if access.status == 1 or access.status == 2 or access.status == 3 %}
+			<a href="{{ path ('addProduct')}}">Ajouter une produit</a>
+		{% endif %}
+		<a href="{{ path ('viewOrders')}}">Commandes</a>
+		<a href="{{ path ('order')}}">Panier</a>
+
+
+		<form name="search_product" method="get">
+			{{ form_start(search_form) }}
+			<button type="submit" class="searchbtn">Rechercher</button>
+			{{ form_row(search_form.reference) }}
+			{{ form_row(search_form.productCategorie, {'placeholder': "Sélectionner une désignation :"}) }}
+			{#{{ form_row(search_form.ops, {'placeholder': "Sélectionner l'OP :"}) }}#}
+			{#{{ form_row(search_form.liness, {'placeholder': "Sélectionner la ligne :"}) }}#}
+		{{ form_end(search_form) }}
+	</form>
+	</div>
+
+		<div
+		class="container"> {# read and display just one flash message type #}
+		{% for message in app.flashes('error') %}
+			<div class="isa_error">
+				<i class="fa fa-check"></i>
+				{{ message }}
+			</div>
+		{% endfor %}
+		{% for message in app.flashes('success') %}
+			<div class="isa_success">
+				<i class="fa fa-times-circle"></i>
+				{{ message }}
+			</div>
+		{% endfor %}
+
+		{% if access.status == 3 or access.status == 4 %}
+
+			{% if products | length > 0 %}
+
+				{% for product in products %}
+					<div class="container_product">
+						<table>
+							<tr>
+								<td rowspan="6" class="tabImg">
+									<a href="{{ path('viewProduct', {id: product.id}) }}"><img class="image_product" id="myImg" src="{{ vich_uploader_asset(product, 'imageFile') }}" alt="{{ product.imageFile }}"/></a>
+								</td>
+								<td class="tabProduct">
+									<strong>Référence :</strong>
+									{{ product.reference }}</td>
+								{% if product.amount > 0 %}
+									<th rowspan="2" class="tabBtn">
+										<form method="get" action="{{ path('addItem', {id: product.id}) }}">
+											<label>Quantité :
+											</label><input type="number" name="quantity" value="1" min="1" max='{{ product.amount }}'/>
+											<button class="basketbtn">Ajouter au panier</button>
+										</form>
+									</th>
+								{% else %}
+									<th rowspan="2">Ce produit n'est plus en stock</th>
+								{% endif %}
+							</tr>
+
+							<tr>
+								<td class="tabProduct">
+									<strong>Intitulé :</strong>
+									{{ product.designation }}</td>
+							</tr>
+
+							<tr>
+								<td rowspan="2" class="tabProduct">
+									<strong>Description :</strong>
+									{{ product.description }}</td>
+								{% if access.status == 1 or access.status == 2 %}
+									<th rowspan="2" class="tabBtn">
+										<a href="{{ path('editProduct', {id: product.id}) }}">
+											<button class="editbtn">Modifier</button>
+										</a>
+									</th>
+								{% else %}
+									<th rowspan="2"></th>
+								{% endif %}
+							</tr>
+
+							<tr></tr>
+
+							<tr>
+								<td class="tabProduct">
+									<strong>Ligne :</strong>
+									{% for product in product.productionLine %}
+										{{ product.name }}
+									{% endfor %}
+								</td>
+								{% if access.status == 1 or access.status == 2 %}
+									<th rowspan="2" class="tabBtn">
+										<form method="POST" enctype="multipart/form-data" action="{{ path('deleteProduct', {id: product.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer le produit ?')">
+											<button class="deletebtn">Supprimer</button>
+										</form>
+									</th>
+								{% else %}
+									<th rowspan="2"></th>
+								{% endif %}
+							</tr>
+
+							<tr>
+								<td class="tabProduct">
+									<strong>Quantité en magasin :</strong>
+									{{ product.amount }}
+									pièces</td>
+							</tr>
+						</table>
+					</div>
+
+				{% endfor %}
+
+				<div class="navigation">
+					{{ knp_pagination_render(pagination) }}
+				</div>
+			</div>
+
+		{% else %}
+			<p>Aucun produit n'a été trouvé</p>
+		{% endif %}
+
+	{% else %}
+
+		{% if products | filter(product => product.amount == 0 or product.amount < product.warningLevel and product.amount != 0) | length > 0 %}
+
+			<h3>Produit épuisé :</h3>
+
+			{% if products | filter(product => product.amount == 0) | length > 0 %}
+
+				{% for product in products | filter( product => product.amount == 0) %}
+					<div class="container_product">
+						<table>
+							<tr>
+								<td rowspan="6" class="tabImg">
+									<a href="{{ path('viewProduct', {id: product.id}) }}"><img class="image_product" id="myImg" src="{{ vich_uploader_asset(product, 'imageFile') }}" alt="{{ product.imageFile }}"/></a>
+								</td>
+								<td class="tabProduct">
+									<strong>Référence :</strong>
+									{{ product.reference }}</td>
+								<th rowspan="2" class="tabBtn">
+									<form method="get" action="{{ path('editProductQuantity', {id: product.id}) }}">
+										<label>Quantité :
+										</label><input type="number" name="quantity" value="1" min="1"/>
+										<button class="basketbtn">Ajouter au stock</button>
+									</form>
+								</th>
+							</tr>
+						</th>
+					</tr>
+
+					<tr>
+						<td class="tabProduct">
+							<strong>Intitulé :</strong>
+							{{ product.designation }}</td>
+					</tr>
+
+					<tr>
+						<td rowspan="2" class="tabProduct">
+							<strong>Description :</strong>
+							{{ product.description }}</td>
+						{% if access.status == 1 or access.status == 2 %}
+							<th rowspan="2" class="tabBtn">
+								<a href="{{ path('editProduct', {id: product.id}) }}">
+									<button class="editbtn">Modifier</button>
+								</a>
+							</th>
+						{% else %}
+							<th rowspan="2"></th>
+						{% endif %}
+					</tr>
+
+					<tr></tr>
+
+					<tr>
+						<td class="tabProduct">
+							<strong>Ligne :</strong>
+							{% for product in product.productionLine %}
+								{{ product.name }}
+							{% endfor %}
+						</td>
+						{% if access.status == 1 or access.status == 2 %}
+							<th rowspan="2" class="tabBtn">
+								<form method="POST" enctype="multipart/form-data" action="{{ path('deleteProduct', {id: product.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer le produit ?')">
+									<button class="deletebtn">Supprimer</button>
+								</form>
+							</th>
+						{% else %}
+							<th rowspan="2"></th>
+						{% endif %}
+					</tr>
+
+					<tr>
+						<td class="tabProduct">
+							<strong>Quantité en magasin :</strong>
+							{{ product.amount }}
+							pièces</td>
+					</tr>
+				</table>
+			</div>
+
+		{% endfor %}
+
+	{% else %}
+		<p>Aucun produit n'a été trouvé</p>
+	{% endif %}
+
+	<br>
+
+	<h3>Produit presque épuisé :</h3>
+
+	{% if products | filter(product => product.amount < product.warningLevel and product.amount != 0) | length > 0 %}
+
+		{% for product in products | filter(product => product.amount < product.warningLevel and product.amount != 0) %}
+			<div class="container_product">
+				<table>
+					<tr>
+						<td rowspan="6" class="tabImg">
+							<a href="{{ path('viewProduct', {id: product.id}) }}"><img class="image_product" id="myImg" src="{{ vich_uploader_asset(product, 'imageFile') }}" alt="{{ product.imageFile }}"/></a>
+						</td>
+						<td class="tabProduct">
+							<strong>Référence :</strong>
+							{{ product.reference }}</td>
+						<th rowspan="2" class="tabBtn">
+							<form method="get" action="{{ path('editProductQuantity', {id: product.id}) }}">
+								<label>Quantité :
+								</label><input type="number" name="quantity" value="1" min="1"/>
+								<button class="basketbtn">Ajouter au stock</button>
+							</form>
+						</th>
+					</tr>
+
+					<tr>
+						<td class="tabProduct">
+							<strong>Intitulé :</strong>
+							{{ product.designation }}</td>
+					</tr>
+
+					<tr>
+						<td rowspan="2" class="tabProduct">
+							<strong>Description :</strong>
+							{{ product.description }}</td>
+						{% if access.status == 1 or access.status == 2 %}
+							<th rowspan="2" class="tabBtn">
+								<a href="{{ path('editProduct', {id: product.id}) }}">
+									<button class="editbtn">Modifier</button>
+								</a>
+							</th>
+						{% else %}
+							<th rowspan="2"></th>
+						{% endif %}
+					</tr>
+
+					<tr></tr>
+
+					<tr>
+						<td class="tabProduct">
+							<strong>Ligne :</strong>
+							{% for product in product.productionLine %}
+								{{ product.name }}
+							{% endfor %}
+						</td>
+						{% if access.status == 1 or access.status == 2 %}
+							<th rowspan="2" class="tabBtn">
+								<form method="POST" enctype="multipart/form-data" action="{{ path('deleteProduct', {id: product.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer le produit ?')">
+									<button class="deletebtn">Supprimer</button>
+								</form>
+							</th>
+						{% else %}
+							<th rowspan="2"></th>
+						{% endif %}
+					</tr>
+
+					<tr>
+						<td class="tabProduct">
+							<strong>Quantité en magasin :</strong>
+							{{ product.amount }}
+							pièces</td>
+					</tr>
+				</table>
+			</div>
+
+		{% endfor %}
+
+	{% else %}
+		<p>Aucun produit n'a été trouvé</p>
+	{% endif %}
+
+{% else %}
+	{% if products | length > 0 %}
+
+		{% for product in products %}
+			<div class="container_product">
+				<table>
+					<tr>
+						<td rowspan="6" class="tabImg">
+							<a href="{{ path('viewProduct', {id: product.id}) }}"><img class="image_product" id="myImg" src="{{ vich_uploader_asset(product, 'imageFile') }}" alt="{{ product.imageFile }}"/></a>
+						</td>
+						<td class="tabProduct">
+							<strong>Référence :</strong>
+							{{ product.reference }}</td>
+						{% if product.amount > 0 %}
+							<th rowspan="2" class="tabBtn">
+								<form method="get" action="{{ path('addItem', {id: product.id}) }}">
+									<label>Quantité :
+									</label><input type="number" name="quantity" value="1" min="1" max="{{ product.amount }}"/>
+									<button class="basketbtn">Ajouter au panier</button>
+								</form>
+							</th>
+						{% else %}
+							<th rowspan="2">Ce produit n'est plus en stock</th>
+						{% endif %}
+					</tr>
+
+					<tr>
+						<td class="tabProduct">
+							<strong>Intitulé :</strong>
+							{{ product.designation }}</td>
+					</tr>
+
+					<tr>
+						<td rowspan="2" class="tabProduct">
+							<strong>Description :</strong>
+							{{ product.description }}</td>
+						{% if access.status == 1 or access.status == 2 %}
+							<th rowspan="2" class="tabBtn">
+								<a href="{{ path('editProduct', {id: product.id}) }}">
+									<button class="editbtn">Modifier</button>
+								</a>
+							</th>
+						{% else %}
+							<th rowspan="2"></th>
+						{% endif %}
+					</tr>
+
+					<tr></tr>
+
+					<tr>
+						<td class="tabProduct">
+							<strong>Ligne :</strong>
+							{% for product in product.productionLine %}
+								{{ product.name }}
+							{% endfor %}
+						</td>
+						{% if access.status == 1 or access.status == 2 %}
+							<th rowspan="2" class="tabBtn">
+								<form method="POST" enctype="multipart/form-data" action="{{ path('deleteProduct', {id: product.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer le produit ?')">
+									<button class="deletebtn">Supprimer</button>
+								</form>
+							</th>
+						{% else %}
+							<th rowspan="2"></th>
+						{% endif %}
+					</tr>
+
+					<tr>
+						<td class="tabProduct">
+							<strong>Quantité en magasin :</strong>
+							{{ product.amount }}
+							pièces</td>
+					</tr>
+				</table>
+			</div>
+
+		{% endfor %}
+
+		<div class="navigation">
+			{{ knp_pagination_render(pagination) }}
+		</div>
+	</div>
+
+{% else %}
+	<p>Aucun produit n'a été trouvé</p>
+{% endif %}{% endif %}{% endif %}<footer class="optionsBar"><a class="parameters" href="{{ path ('myaccount')}}">
+<button type="button" class="parametersbtn">Paramètres</button></a><a class="logout" href="{{ path ('app_logout')}}">
+<button type="button" class="logoutbtn">Se déconnecter</button></a></footer>{% endblock body %}

@@ -1,0 +1,19 @@
+{% include 'base.html.twig' %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('css/homepage/forgetpassword.css') }}"/>
+{% endblock stylesheets %}
+
+{% block body %}
+
+	<br><br><br><br><br><br>
+
+	<div class="container">
+		<h2 class="">Mais Market Point qu'est-ce que c'est ?</h2>
+		<p>C'est une application web permettant de gérer les stocks du magasin de ligne.</p>
+		<a href="{{ path ('app_login')}}">
+			<button type="button" class="cancelbtn">Retour</button>
+		</a>
+	</div>
+
+{% endblock %}

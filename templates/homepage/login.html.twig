@@ -1,0 +1,70 @@
+{% include 'base.html.twig' %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('css/homepage/login.css') }}"/>
+{% endblock stylesheets %}
+
+{% block body %}
+
+	<br><br><br><br><br><br>
+
+	<form class="connection" method="post">
+		<div class="container">
+			<h1 class="mainTitle">Bienvenue sur l'application Market Point</h1>
+		</div>
+
+		<div class="container">
+			<h2 class="h3 mb-3 font-weight-normal">Veuillez saisir votre IPN et votre mot de passe</h2>
+
+			{% if error %}
+				<div class="isa_error">
+					<i class="fa fa-check"></i>
+					{{ error.messageKey|trans(error.messageData, 'security') }}
+				</div>
+			{% endif %}
+
+			{% for message in app.flashes('success') %}
+				<div class="isa_success">
+					<i class="fa fa-times-circle"></i>
+					{{ message }}
+				</div>
+			{% endfor %}
+
+			<label for="inputIpn" class="sr-only">IPN :</label>
+			<input type="text" value="{{ last_username }}" name="ipn" id="inputIpn" class="form-control" placeholder="Entrer votre IPN" required autofocus>
+			<label for="inputPassword" class="sr-only">Mot de passe :</label>
+			<input
+			type="password" name="password" id="inputPassword" class="form-control" placeholder="Entrer votre mot de passe" required>
+		{#<span class="psw">
+												<a href="{{ path ('forgetpassword')}}">Mot de passe oublié</a>
+											</span>#}
+		</div>
+
+		<hr>
+
+		<input
+		type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+		{# Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+																								   See https://symfony.com/doc/current/security/remember_me.html
+																										<div class="checkbox mb-3">
+																										    <label>
+																										        <input type="checkbox" name="_remember_me"> Remember me
+																										    </label>
+																										</div>
+																								#}
+
+		<div class="bouton">
+			<button type="submit" class="login">Se connecter</button>
+			<a href="{{ path ('register')}}">
+				<button type="button" class="inscription">Inscription</button>
+			</a>
+		</div>
+
+		<footer class="barreInfo">
+			<a class="enSavoirPlus" href="{{ path ('learnMore')}}">En savoir plus</a>
+			{#<a class="modTablet" href="">Badge</a>#}
+		</footer>
+
+	</form>
+{% endblock %}

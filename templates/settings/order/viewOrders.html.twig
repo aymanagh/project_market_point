@@ -1,0 +1,66 @@
+{% include "settings/index.html.twig" %}
+
+{% block body %}
+
+	<div class="container">
+
+		<h2>Commandes</h2>
+
+		{# read and display just one flash message type #}
+		{% for message in app.flashes('error') %}
+			<div class="isa_error">
+				<i class="fa fa-check"></i>
+				{{ message }}
+			</div>
+		{% endfor %}
+		{% for message in app.flashes('success') %}
+			<div class="isa_success">
+				<i class="fa fa-times-circle"></i>
+				{{ message }}
+			</div>
+		{% endfor %}
+
+		{% if orders | length > 0 %}
+			<table>
+				<tr>
+					<th>OT :</th>
+					<th>Date de la commande :</th>
+					<th>Commandé par :</th>
+					<th>Prix total :</th>
+					{% if access.status == 1 %}
+						<th>Atelier :</th>
+					{% endif %}
+					<th></th>
+				</tr>
+				{% for order in orders %}
+					<tr>
+						<td>
+							{{ order.ot }}
+						</td>
+						<td>
+							{{ order.addAt|format_datetime('short', 'short', locale='fr') }}
+						</td>
+						<td>
+							{{ order.user.lastname }}
+							{{ order.user.firstname }}
+						</td>
+						<td>
+							{{ order.totalPrice|format_currency('EUR', locale='fr') }}
+						</td>
+						{% if access.status == 1 %}
+							<td>{{ order.workshop }}</td>
+						{% endif %}
+						<td>
+							<a href="{{ path('viewOrder', {id: order.id}) }}">
+								<button class="validbtn">En savoir plus</button>
+							</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</table>
+		{% else %}
+			<p>Aucune commande n'a été effectuée</p>
+		{% endif %}
+	</div>
+
+{% endblock %}

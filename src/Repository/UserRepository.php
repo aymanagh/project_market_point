@@ -36,6 +36,23 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
+    /**
+     * Afficher tous les utilisateurs sauf Administrateur
+     *
+     * @return void
+     */
+    public function findAllWithoutAdmin(object $id)
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->where('u.status != 1')
+            ->setParameter('workshop', $id)
+            ->andWhere('u.workshop = :workshop');
+
+        $query = $qb->getQuery();
+
+        return $query->execute();
+    }
+
     // /**
     //  * @return User[] Returns an array of User objects
     //  */

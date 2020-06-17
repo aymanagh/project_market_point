@@ -1,0 +1,130 @@
+{% include "settings/plant/index.html.twig" %}
+
+{% block body %}
+
+	<div class="container">
+
+		<h2>Usine</h2>
+
+		{# read and display just one flash message type #}
+		{% for message in app.flashes('error') %}
+			<div class="isa_error">
+				<i class="fa fa-check"></i>
+				{{ message }}
+			</div>
+		{% endfor %}
+		{% for message in app.flashes('success') %}
+			<div class="isa_success">
+				<i class="fa fa-times-circle"></i>
+				{{ message }}
+			</div>
+		{% endfor %}
+
+		{% if workshops | length > 0 %}
+			<table>
+				<tr>
+					<th>Atelier :</th>
+					<th></th>
+				</tr>
+				{% for workshop in workshops %}
+					<tr>
+						<td>
+							{{ workshop.name }}
+						</td>
+						{% if access.status == 1 %}
+							<td>
+								<form method="POST" action="{{ path('deleteWorkshop', {id: workshop.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet atelier ?')">
+									<button class="deletebtn">Supprimer</button>
+								</form>
+							</td>
+						{% else %}
+							<td></td>
+						{% endif %}
+
+					</tr>
+				{% endfor %}
+			</table>
+		{% else %}
+			<table>
+				<tr>
+					<th>Atelier :</th>
+				</tr>
+				<tr>
+					<td>
+						Aucun atelier n'a été ajouté
+					</td>
+				</tr>
+			</table>
+		{% endif %}
+
+		<br>
+
+		{% if productionLine | length > 0 %}
+			<table>
+				<tr>
+					<th>Ligne :</th>
+					<th></th>
+				</tr>
+				{% for productionLine in productionLine %}
+					<tr>
+						<td>
+							{{ productionLine.name }}
+						</td>
+						<td>
+							<form method="POST" action="{{ path('deleteLine', {id: productionLine.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette ligne ?')">
+
+								<button class="deletebtn">Supprimer</button>
+							</form>
+						</td>
+					</tr>
+				{% endfor %}
+			</table>
+		{% else %}
+			<table>
+				<tr>
+					<th>Ligne :</th>
+				</tr>
+				<tr>
+					<td>
+						Aucune ligne n'a été ajoutée
+					</td>
+				</tr>
+			</table>
+		{% endif %}
+
+		<br>
+
+		{% if ops | length > 0 %}
+			<table>
+				<tr>
+					<th>Op :</th>
+					<th></th>
+				</tr>
+				{% for op in ops %}
+					<tr>
+						<td>
+							{{ op.name }}
+						</td>
+						<td>
+							<form method="POST" action="{{ path('deleteOp', {id: op.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet Op ?')">
+								<button class="deletebtn">Supprimer</button>
+							</form>
+						</td>
+					</tr>
+				{% endfor %}
+			</table>
+		{% else %}
+			<table>
+				<tr>
+					<th>Op :</th>
+				</tr>
+				<tr>
+					<td>
+						Aucune Op n'a été ajoutée
+					</td>
+				</tr>
+			</table>
+		{% endif %}
+	</div>
+
+{% endblock %}

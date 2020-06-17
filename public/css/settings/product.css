@@ -1,0 +1,27 @@
+/* Full-width input fields */
+
+input[type=text],
+input[type=file],
+select,
+option {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0 25px 0;
+    display: inline-block;
+    border: none;
+    box-sizing: border-box;
+    background: #ffffff;
+}
+
+input[type=text]:focus,
+input[type=file]:focus,
+select:focus,
+option:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+.validbtn {
+    float: left;
+    width: 15%;
+}

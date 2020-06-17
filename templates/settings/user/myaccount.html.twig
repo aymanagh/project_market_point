@@ -1,0 +1,44 @@
+{% include "settings/index.html.twig" %}
+
+{% block body %}
+
+	<div class="container">
+
+		<h2>Mon compte</h2>
+
+		<table>
+			<tr>
+				<td>
+					<b>Nom :</b>
+					{{ user.lastname }}</td>
+			</tr>
+			<tr>
+				<td>
+					<b>Prénom :</b>
+					{{ user.firstname }}</td>
+			</tr>
+			<tr>
+				<td>
+					<b>IPN :</b>
+					{{ user.ipn }}</td>
+			</tr>
+			<tr>
+				<td>
+					<b>Adresse mail :</b>
+					{{ user.mail }}</td>
+			</tr>
+			<tr>
+				<td>
+					<b>Atelier :</b>
+					{{ user.workshop }}</td>
+			</tr>
+			<tr>
+				<td>
+					<b>Statut :</b>
+					{{ user.statustype }}</td>
+			</tr>
+		</table>
+
+	</div>
+
+{% endblock %}

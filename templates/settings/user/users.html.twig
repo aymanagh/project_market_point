@@ -1,0 +1,78 @@
+{% include "settings/index.html.twig" %}
+
+{% block body %}
+
+	<div class="container">
+
+		<h2>Utilisateurs</h2>
+
+		{# read and display just one flash message type #}
+		{% for message in app.flashes('error') %}
+			<div class="isa_error">
+				<i class="fa fa-check"></i>
+				{{ message }}
+			</div>
+		{% endfor %}
+		{% for message in app.flashes('success') %}
+			<div class="isa_success">
+				<i class="fa fa-times-circle"></i>
+				{{ message }}
+			</div>
+		{% endfor %}
+
+		<table>
+			<tr>
+				<th>Nom :</th>
+				<th>Prénom :</th>
+				<th>IPN :</th>
+				<th>Adresse mail :</th>
+				<th>Atelier :</th>
+				<th>Statut :</th>
+				<th>Autorisé :</th>
+				<th></th>
+				<th></th>
+			</tr>
+			{% for user in users %}
+				<tr>
+					<td>
+						{{ user.lastname }}
+					</td>
+					<td>
+						{{ user.firstname }}
+					</td>
+					<td>
+						{{ user.username }}
+					</td>
+					<td>
+						{{ user.mail }}
+					</td>
+					<td>
+						{{ user.workshop }}
+					</td>
+					<td>
+						{{ user.statustype }}
+					</td>
+					<td>
+						{{ user.accesstype }}
+					</td>
+					<td>
+						<a href="{{ path('editUsers', {id: user.id}) }}">
+							<button class="editbtn">Modifier</button>
+						</a>
+					</td>
+					{% if access.status == 1 %}
+						<td>
+							<form method="POST" action="{{ path('deleteUsers', {id: user.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')">
+								<button class="deletebtn">Supprimer</button>
+							</form>
+						</td>
+					{% else %}
+						<td></td>
+					{% endif %}
+				</tr>
+			{% endfor %}
+		</table>
+
+	</div>
+
+{% endblock %}

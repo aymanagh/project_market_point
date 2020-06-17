@@ -1,0 +1,49 @@
+{% include "settings/index.html.twig" %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('css/settings/product.css') }}"/>
+{% endblock %}
+
+{% block body %}
+
+	<form name="edit_user" class="container" method="post">
+
+		<h2>Modifier l'utilisateur</h2><br>
+
+		{# read and display just one flash message type #}
+		{% for message in app.flashes('error') %}
+			<div class="isa_error">
+				<i class="fa fa-check"></i>
+				{{ message }}
+			</div>
+		{% endfor %}
+		{% for message in app.flashes('success') %}
+			<div class="isa_success">
+				<i class="fa fa-times-circle"></i>
+				{{ message }}
+			</div>
+		{% endfor %}
+
+		{{ form_start(form) }}
+
+		{{ form_row(form.lastname, {'label': 'Nom :', 'attr': {'placeholder': "Entrer votre nom"}}) }}
+		{{ form_row(form.firstname, {'label': 'Prénom :', 'attr': {'placeholder': "Entrer votre prénom"}}) }}
+		{{ form_row(form.username, {'label': 'IPN :', 'attr': {'placeholder': "Entrer votre IPN"}}) }}
+		{{ form_row(form.badge, {'label': 'Badge :', 'attr': {'placeholder': "Passer votre badge dans le lecteur"}}) }}
+		{{ form_row(form.mail, {'label': 'Adresse mail :', 'attr': {'placeholder': "Entrer votre adresse mail"}}) }}
+		{{ form_row(form.workshop, {'label': 'Atelier :', 'placeholder': "Sélectionner votre atelier"}) }}
+		{{ form_row(form.status, {'label': 'Statut :', 'placeholder': "Sélectionner votre statut"}) }}
+		{{ form_row(form.access, {'label': 'Autorisé :'}) }}
+
+		<div class="clearfix">
+			<button type="submit" class="submitbtn">Modifier</button>
+			<a href="{{ path ('users')}}">
+				<button type="button" class="cancelbtn">Retour</button>
+			</a>
+		</div>
+
+		{{ form_end(form) }}
+
+	</form>
+
+{% endblock %}

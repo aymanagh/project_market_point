@@ -1,0 +1,65 @@
+.container {
+    padding: 20px;
+}
+
+/* Full-width input fields */
+
+input[type=text],
+select,
+option {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0 25px 0;
+    display: inline-block;
+    border: none;
+    box-sizing: border-box;
+    background: #ffffff;
+}
+
+input[type=text]:focus,
+select:focus,
+option:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 16px;
+}
+
+.image_modal {
+    width: 640px;
+    height: auto;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2
+}
+
+/* Set a style for all buttons */
+
+.deletebtn {
+    background-color: red;
+    float: right;
+    width: 20%;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.validbtn {
+    float: left;
+    width: 15%;
+}

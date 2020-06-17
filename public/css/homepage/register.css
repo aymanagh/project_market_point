@@ -1,0 +1,70 @@
+.alertErrors {
+    background-color: #FF0500;
+    color: white;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 20px;
+}
+
+/* Full-width input fields */
+
+input[type=text],
+input[type=password],
+input[type=email],
+select,
+option {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0 25px 0;
+    display: inline-block;
+    border: none;
+    box-sizing: border-box;
+    background: #ffffff;
+}
+
+input[type=text]:focus,
+input[type=password]:focus,
+input[type=email]:focus,
+select:focus,
+option:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+/* Set a style for all buttons */
+
+hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 30px;
+}
+
+/* Extra styles for the cancel button */
+
+.cancelbtn {
+    background-color: darkgrey;
+    float: left;
+    width: 20%;
+}
+
+.signupbtn {
+    float: right;
+    width: 20%;
+}
+
+/* Clear floats */
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* Change styles for cancel button and signup button on extra small screens */
+
+@media screen and (max-width: 300px) {
+
+    .cancelbtn,
+    .signupbtn {
+        width: 100%;
+    }
+}

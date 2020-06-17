@@ -2,14 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity(fields="ipn", message="Cet IPN est déjà utilisé")
  */
 class User implements UserInterface
@@ -54,7 +55,7 @@ class User implements UserInterface
     private $firstname;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $mail;
 
@@ -71,7 +72,7 @@ class User implements UserInterface
     ];
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=false)
      */
     private $status;
 
@@ -86,9 +87,33 @@ class User implements UserInterface
     ];
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=false)
      */
     private $access;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Workshop::class, inversedBy="users")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $workshop;
+
+    /**
+     * @ORM\OneToMany(targetEntity=MarketOrder::class, mappedBy="user")
+     */
+    private $marketOrders;
+
+    public function __toString()
+    {
+        return $this->ipn;
+    }
+
+    public function __construct()
+    {
+        $this->roles = array('ROLE_USER');
+        $this->access = false;
+        $this->add_at = new \DateTime();
+        $this->marketOrders = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -270,5 +295,48 @@ class User implements UserInterface
     public function getAccessType(): string
     {
         return self::ACCESS[$this->access];
+    }
+
+    public function getWorkshop(): ?Workshop
+    {
+        return $this->workshop;
+    }
+
+    public function setWorkshop(?Workshop $workshop): self
+    {
+        $this->workshop = $workshop;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|MarketOrder[]
+     */
+    public function getMarketOrders(): Collection
+    {
+        return $this->marketOrders;
+    }
+
+    public function addMarketOrder(MarketOrder $marketOrder): self
+    {
+        if (!$this->marketOrders->contains($marketOrder)) {
+            $this->marketOrders[] = $marketOrder;
+            $marketOrder->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMarketOrder(MarketOrder $marketOrder): self
+    {
+        if ($this->marketOrders->contains($marketOrder)) {
+            $this->marketOrders->removeElement($marketOrder);
+            // set the owning side to null (unless already changed)
+            if ($marketOrder->getUser() === $this) {
+                $marketOrder->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }

@@ -1,0 +1,148 @@
+.mainTitle {
+    background-color: white;
+    padding: 10px;
+    text-align: center;
+    border-radius: 10px;
+    width: 45%;
+    margin: auto;
+}
+
+/* Add padding to containers */
+
+.container {
+    padding: 18px;
+}
+
+.flash-notice {
+    background-color: #FFCC00;
+    color: black;
+    border-radius: 2px;
+    padding: 15px;
+    margin: auto;
+}
+
+.alertErrors {
+    background-color: #FF0500;
+    color: white;
+    border-radius: 2px;
+    padding: 15px;
+    margin: auto;
+}
+
+.connection,
+.bouton {
+    background-color: #F0F0EF;
+    border-radius: 15px;
+    border: 3px solid #F0F0EF;
+    padding: 10px;
+}
+
+/* Bordered form */
+
+form {
+    border: 3px solid #f1f1f1;
+}
+
+/* Full-width inputs */
+
+input[type=text],
+input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0 25px 0;
+    display: inline-block;
+    border: none;
+    box-sizing: border-box;
+    background: #ffffff;
+}
+
+input[type=text]:focus,
+input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 30px;
+}
+
+/* Set a style for all buttons */
+
+button {
+    background-color: #FFCC00;
+    font-weight: Bold;
+    border-radius: 10px;
+    color: black;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* Effet sur les boutons */
+
+button:hover {
+    opacity: 0.9;
+}
+
+/* Extra styles for the cancel button */
+
+.inscription {
+    background-color: darkgrey;
+    float: right;
+    width: 20%;
+}
+
+.login {
+    float: left;
+    width: 20%;
+}
+
+/* The "Forgot password" text */
+
+span.psw {
+    float: right;
+    padding-top: 16px;
+    color: black;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+
+@media screen and (max-width: 300px) {
+    span.psw {
+        display: block;
+        float: none;
+    }
+
+    .cancelbtn {
+        width: 100%;
+    }
+}
+
+.barreInfo {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: whitesmoke;
+    color: black;
+}
+
+.modTablet {
+    float: left;
+    padding: 10px;
+    color: black;
+}
+
+.modIdentifiers {
+    float: left;
+    padding: 10px;
+    color: black;
+}
+
+.enSavoirPlus {
+    float: right;
+    padding: 10px;
+}

@@ -1,0 +1,60 @@
+{% include "base.html.twig" %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('css/settings/product.css') }}"/>
+{% endblock %}
+
+{% block body %}
+
+	<br><br><br><br><br><br><br>
+
+	<div class="topnav">
+		<a class="active" href="{{ path ('homeuser')}}">Accueil</a>
+		<a href="{{ path ('addProductCategories')}}">Ajouter une catégorie de produit</a>
+	</div>
+
+	<div class="container">
+
+		<form name="new_product" enctype="multipart/form-data" class="container" method="post">
+
+			<h2>Ajout d'un produit</h2><br>
+
+			{# read and display just one flash message type #}
+			{% for message in app.flashes('error') %}
+				<div class="isa_error">
+					<i class="fa fa-check"></i>
+					{{ message }}
+				</div>
+			{% endfor %}
+			{% for message in app.flashes('success') %}
+				<div class="isa_success">
+					<i class="fa fa-times-circle"></i>
+					{{ message }}
+				</div>
+			{% endfor %}
+
+			{{ form_start(form) }}
+
+			{{ form_row(form.reference, {'label': 'Référence :', 'attr': {'placeholder': "Entrer la référence du produit"}}) }}
+			{{ form_row(form.imageFile, {'label': 'Image :'}) }}
+			{{ form_row(form.designation, {'label': 'Intitulé :', 'attr': {'placeholder': "Entrer l'intitulé du produit"}}) }}
+			{{ form_row(form.productCategorie, {'label': 'Catégorie :', 'placeholder': "Sélectionner la catégorie du produit"}) }}
+			{{ form_row(form.description, {'label': 'Caractéristique technique :', 'attr': {'placeholder': "Entrer les caractéristiques techniques du produit"}}) }}
+			{{ form_row(form.price, {'label': 'Prix :', 'attr': {'placeholder': "Entrer le prix du produit"}}) }}
+			{{ form_row(form.productionLine, {'label': 'Ligne :', 'placeholder': "Sélectionner la ligne du produit"}) }}<br>
+			{#{{ form_row(form.ops, {'label': 'OP :', 'placeholder': "Sélectionner l'OP du produit"}) }}#}
+			{{ form_row(form.amount, {'label': "Quantité :", 'attr': {'placeholder': "Entrer le nombre de produit en stock"}}) }}
+			{{ form_row(form.warning_level, {'label': "Seuil alerte :", 'attr': {'placeholder': "Entrer le seuil d'alerte du produit"}}) }}
+			{{ form_row(form.waiting, {'label': 'En attente :', 'attr': {'placeholder': "Entrer le nombre de produit en attente"}}) }}
+
+			<div class="clearfix">
+				<button type="submit" class="validbtn">Valider</button>
+			</div>
+
+			{{ form_end(form) }}
+
+		</form>
+
+	</div>
+
+{% endblock %}
