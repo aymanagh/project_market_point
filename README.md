@@ -14,8 +14,6 @@ This project was developed with Symfony framework by Tanguy Augeard. It's a web 
 * Consult the characteristics of products
 * Stock alert threshold 
 
----
-
 ## Documentation
 
 **Symfony** [documentation](https://symfony.com/doc/current/index.html)
