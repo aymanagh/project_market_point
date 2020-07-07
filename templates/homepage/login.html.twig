@@ -33,26 +33,23 @@
 			<label for="inputIpn" class="sr-only">IPN :</label>
 			<input type="text" value="{{ last_username }}" name="ipn" id="inputIpn" class="form-control" placeholder="Entrer votre IPN" required autofocus>
 			<label for="inputPassword" class="sr-only">Mot de passe :</label>
-			<input
-			type="password" name="password" id="inputPassword" class="form-control" placeholder="Entrer votre mot de passe" required>
-		{#<span class="psw">
-												<a href="{{ path ('forgetpassword')}}">Mot de passe oublié</a>
-											</span>#}
+			<input type="password" name="password" id="inputPassword" class="form-control" placeholder="Entrer votre mot de passe" required>
+			{#<span class="psw">
+				<a href="{{ path ('forgetpassword')}}">Mot de passe oublié</a>
+			</span>#}
 		</div>
 
 		<hr>
 
-		<input
-		type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+		<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
 		{# Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-																								   See https://symfony.com/doc/current/security/remember_me.html
-																										<div class="checkbox mb-3">
-																										    <label>
-																										        <input type="checkbox" name="_remember_me"> Remember me
-																										    </label>
-																										</div>
-																								#}
+		See https://symfony.com/doc/current/security/remember_me.html
+		<div class="checkbox mb-3">
+			<label>
+				<input type="checkbox" name="_remember_me"> Remember me
+			</label>
+		</div>#}
 
 		<div class="bouton">
 			<button type="submit" class="login">Se connecter</button>

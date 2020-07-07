@@ -20,7 +20,7 @@ class MarketOrderRepository extends ServiceEntityRepository
     }
 
     /**
-     * Afficher toutes les commandes par utilisateur
+     * Afficher toutes les commandes par atelier
      *
      * @return void
      */

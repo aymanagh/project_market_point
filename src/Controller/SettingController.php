@@ -179,7 +179,7 @@ class SettingController extends AbstractController
             }
         } else {
             $access = $this->getUser();
-            
+
             if ($access->getStatus() == 1) {
                 $user = $user->getId();
                 if ($this->getUser()->getId() == $user) {
@@ -403,7 +403,7 @@ class SettingController extends AbstractController
      * 
      * @Route("/home/settings/plant/deleteline/{id}", name="deleteLine")
      *
-     * @param Line $line
+     * @param ProductionLine $productionLine
      * @return void
      */
     public function deleteLine(ProductionLine $productionLine)
@@ -444,7 +444,7 @@ class SettingController extends AbstractController
      * @param Request $request
      * @return void
      */
-    public function addOp(Request $request)
+    /**public function addOp(Request $request)
     {
         if ($this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY') | $this->getUser()->getAccess() == false) {
             if ($this->getUser()->getAccess() == false) {
@@ -487,7 +487,7 @@ class SettingController extends AbstractController
                 return $this->redirectToRoute('homeuser');
             }
         }
-    }
+    }*/
 
     /**
      * Fonction "Supprimer une Op"
@@ -497,7 +497,7 @@ class SettingController extends AbstractController
      * @param Op $op
      * @return void
      */
-    public function deleteOp(Op $op)
+    /**public function deleteOp(Op $op)
     {
         if ($this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY') | $this->getUser()->getAccess() == false) {
             if ($this->getUser()->getAccess() == false) {
@@ -507,7 +507,7 @@ class SettingController extends AbstractController
             }
         } else {
             if ($this->getUser()->getStatus() == 1 or $this->getUser()->getStatus() == 2) {
-                
+
                 // Suppression d'une ligne
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->remove($op);
@@ -526,5 +526,5 @@ class SettingController extends AbstractController
                 return $this->redirectToRoute('homeuser');
             }
         }
-    }
+    }*/
 }

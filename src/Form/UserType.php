@@ -34,9 +34,9 @@ class UserType extends AbstractType
             ])
             ->add('status', ChoiceType::class, [
                 'choices' => [
-                    'Gestionnaire' => 2,
-                    'Conducteur de ligne' => 3,
-                    'Opérateur' => 4
+                    "Administrateur d'atelier" => 2,
+                    'Gestionnaire' => 3,
+                    'Conducteur de ligne' => 4
                 ]
             ]);
     }

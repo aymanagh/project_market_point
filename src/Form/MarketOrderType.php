@@ -13,8 +13,7 @@ class MarketOrderType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('ot', NumberType::class)
-        ;
+            ->add('ot', NumberType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

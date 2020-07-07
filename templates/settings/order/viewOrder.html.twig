@@ -1,6 +1,19 @@
-{% include "settings/index.html.twig" %}
+{% include "base.html.twig" %}
+
+{% block title %}Paramètres{% endblock %}
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('css/settings/settings.css') }}"/>
+{% endblock %}
+
 
 {% block body %}
+
+	<br><br><br><br><br><br><br>
+
+	<div class="topnav">
+		<a class="active" href="{{ path ('homeuser') }}">Accueil</a>
+		<a href="{{ path ('viewOrders') }}">Commandes</a>
+	</div>
 
 	<div class="container">
 
@@ -12,8 +25,10 @@
 					<th style="text-align: center">Numéro OT :</th>
 					<td>{{ order.ot }}</td>
 					<th style="text-align: center">Commandé par :</th>
-					<td>{{ order.user.lastname }}
-						{{ order.user.firstname }}</td>
+					<td>
+						{{ order.user.lastname }}
+						{{ order.user.firstname }}
+					</td>
 					<th style="text-align: center">Date de la commande :</th>
 					<td>{{ order.addAt|format_datetime('short', 'short', locale='fr') }}</td>
 				</tr>
@@ -49,7 +64,8 @@
 				<tr>
 					<td>
 						<strong>Prix total de la commande :</strong>
-						{{ order.totalPrice|format_currency('EUR', locale='fr') }}</td>
+						{{ order.totalPrice|format_currency('EUR', locale='fr') }}
+					</td>
 				</tr>
 			</tfoot>
 		</table>

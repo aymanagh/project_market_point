@@ -18,21 +18,21 @@
 
 		{{ form_start(form) }}
 
-		{{ form_row(form.reference, {'label': 'Référence :', 'attr': {'placeholder': "Entrer la référence du produit"}}) }}
-		{{ form_row(form.imageFile, {'label': 'Image :'}) }}
-		{{ form_row(form.designation, {'label': 'Intitulé :', 'attr': {'placeholder': "Entrer l'intitulé du produit"}}) }}
-		{{ form_row(form.productCategorie, {'label': 'Catégorie :', 'placeholder': "Sélectionner la catégorie du produit"}) }}
-		{{ form_row(form.description, {'label': 'Caractéristique technique :', 'attr': {'placeholder': "Entrer les caractéristiques techniques du produit"}}) }}
-		{{ form_row(form.price, {'label': 'Prix :', 'attr': {'placeholder': "Entrer le prix du produit"}}) }}
-		{{ form_row(form.productionLine, {'label': 'Ligne :', 'placeholder': "Sélectionner la ligne du produit"}) }}<br>
-		{#{{ form_row(form.ops, {'label': 'OP :', 'placeholder': "Sélectionner l'OP du produit"}) }}#}
-		{{ form_row(form.amount, {'label': "Quantité :", 'attr': {'placeholder': "Entrer le nombre de produit en stock"}}) }}
-		{{ form_row(form.warning_level, {'label': "Seuil alerte :", 'attr': {'placeholder': "Entrer le seuil d'alerte du produit"}}) }}
-		{{ form_row(form.waiting, {'label': 'En attente :', 'attr': {'placeholder': "Entrer le nombre de produit en attente"}}) }}
+			{{ form_row(form.reference, {'label': 'Référence :', 'attr': {'placeholder': "Entrer la référence du produit"}}) }}
+			{{ form_row(form.imageFile, {'label': 'Image :'}) }}
+			{{ form_row(form.designation, {'label': 'Intitulé :', 'attr': {'placeholder': "Entrer l'intitulé du produit"}}) }}
+			{{ form_row(form.productCategorie, {'label': 'Catégorie :', 'placeholder': "Sélectionner la catégorie du produit"}) }}
+			{{ form_row(form.description, {'label': 'Caractéristique technique :', 'attr': {'placeholder': "Entrer les caractéristiques techniques du produit"}}) }}
+			{{ form_row(form.price, {'label': 'Prix :', 'attr': {'placeholder': "Entrer le prix du produit"}}) }}
+			{{ form_row(form.productionLine, {'label': 'Ligne :', 'placeholder': "Sélectionner la ligne du produit"}) }}<br>
+			{#{{ form_row(form.ops, {'label': 'OP :', 'placeholder': "Sélectionner l'OP du produit"}) }}#}
+			{{ form_row(form.amount, {'label': "Quantité :", 'attr': {'placeholder': "Entrer le nombre de produit en stock"}}) }}
+			{{ form_row(form.warning_level, {'label': "Seuil alerte :", 'attr': {'placeholder': "Entrer le seuil d'alerte du produit"}}) }}
+			{{ form_row(form.waiting, {'label': 'En attente :', 'attr': {'placeholder': "Entrer le nombre de produit en attente"}}) }}
 
-		<div class="clearfix">
-			<button type="submit" class="validbtn">Valider</button>
-		</div>
+			<div class="clearfix">
+				<button type="submit" class="validbtn">Valider</button>
+			</div>
 
 		{{ form_end(form) }}
 

@@ -107,14 +107,14 @@ class MarketOrderController extends AbstractController
         } else {
             $access = $this->getUser();
 
-            if ($access->getStatus() == 1 or $access->getStatus() == 2) {
+            if ($access->getStatus() == 1 or $access->getStatus() == 2 or $access->getStatus() == 3) {
                 if ($access->getStatus() == 1) {
                     // Requêtes pour récupérer toutes les commandes
                     $orders = $this->getDoctrine()->getRepository(MarketOrder::class)->findAll();
                 } else {
                     $orders = $this->getDoctrine()->getRepository(MarketOrder::class)->findAllOrderByWorkshop($access->getWorkshop());
                 }
-            } elseif ($access->getStatus() == 3 or $access->getStatus() == 4) {
+            } elseif ($access->getStatus() == 4) {
                 // Requêtes pour récupérer toutes les commandes par utilisateurs
                 $orders = $this->getDoctrine()->getRepository(MarketOrder::class)->findAllOrderByUser($access->getId());
             } else {
@@ -183,7 +183,7 @@ class MarketOrderController extends AbstractController
         } else {
             $access = $this->getUser();
 
-            if ($access->getStatus() == 1 or $access->getStatus() == 2 or $access->getStatus() == 3 or $access->getStatus() == 4) {
+            if ($access->getStatus() == 1 or $access->getStatus() == 2 or $access->getStatus() == 4) {
                 $quantity = $_GET['quantity'];
 
                 // Création du formulaire de récupération d'un produit
@@ -236,7 +236,7 @@ class MarketOrderController extends AbstractController
         } else {
             $access = $this->getUser();
 
-            if ($access->getStatus() == 1 or $access->getStatus() == 2 or $access->getStatus() == 3 or $access->getStatus() == 4) {
+            if ($access->getStatus() == 1 or $access->getStatus() == 2 or $access->getStatus() == 4) {
                 $cartService->remove($id);
 
                 // Message de succès

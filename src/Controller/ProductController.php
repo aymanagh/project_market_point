@@ -31,7 +31,7 @@ class ProductController extends AbstractController
         } else {
             $access = $this->getUser();
 
-            if ($access->getStatus() == 1 or $access->getStatus() == 2 or $access->getStatus() == 3) {
+            if ($access->getStatus() == 1 or $access->getStatus() == 2) {
 
                 // Création du formulaire
                 $product = new Product();
@@ -43,7 +43,7 @@ class ProductController extends AbstractController
 
                     // Associer un produit à un atelier
                     $product->setWorkshop($access->getWorkshop());
-                    
+
                     // Sauvegarder un produit
                     $entityManager = $this->getDoctrine()->getManager();
                     $entityManager->persist($product);
@@ -88,7 +88,7 @@ class ProductController extends AbstractController
                 return $this->redirectToRoute('app_login');
             }
         } else {
-            if ($this->getUser()->getStatus() == 1 or $this->getUser()->getStatus() == 2 or $this->getUser()->getStatus() == 3) {
+            if ($this->getUser()->getStatus() == 1 or $this->getUser()->getStatus() == 2) {
                 // Création du formulaire
                 $form = $this->createForm(ProductType::class, $product);
 
@@ -108,7 +108,7 @@ class ProductController extends AbstractController
 
                     // Redirection vers la page d'accueil
                     return $this->redirectToRoute('homeuser');
-                } 
+                }
                 // Afficher le rendu de la page
                 return $this->render('settings/product/editproduct.html.twig', [
                     'product' => $product,
@@ -180,7 +180,7 @@ class ProductController extends AbstractController
                 return $this->redirectToRoute('app_login');
             }
         } else {
-            if ($this->getUser()->getStatus() == 1 or $this->getUser()->getStatus() == 2 or $this->getUser()->getStatus() == 3) {
+            if ($this->getUser()->getStatus() == 1 or $this->getUser()->getStatus() == 2) {
                 // Supprimer un produit
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->remove($product);
@@ -220,7 +220,7 @@ class ProductController extends AbstractController
         } else {
             $access = $this->getUser();
 
-            if ($access->getStatus() == 1 or $access->getStatus() == 2 or $access->getStatus() == 3) {
+            if ($access->getStatus() == 1 or $access->getStatus() == 2) {
 
                 // Création du formulaire
                 $productCategorie = new ProductCategorie();
@@ -273,7 +273,7 @@ class ProductController extends AbstractController
         } else {
             // Requêtes pour récupérer le produit demandé
             $product = $this->getDoctrine()->getRepository(Product::class)->find($id);
-            
+
             // Afficher le rendu de la page
             return $this->render('homeuser\viewProduct.html.twig', [
                 'product' => $product,

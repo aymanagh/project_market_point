@@ -14,8 +14,7 @@ class ProductionLineType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
-            ->add('workshop')
-        ;
+            ->add('workshop');
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -30,7 +30,7 @@ class ProductSearchType extends AbstractType
                 'mapped' => true,
                 'required' => false,
             ]);
-            /*->add('liness', EntityType::class, [
+        /*->add('liness', EntityType::class, [
                 'class' => Line::class,
                 'choice_label' => 'name',
                 'label' => false,

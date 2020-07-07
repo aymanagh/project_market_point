@@ -32,9 +32,9 @@ class EditUserType extends AbstractType
             ->add('status', ChoiceType::class, [
                 'choices' => [
                     'Administrateur' => 1,
-                    'Gestionnaire' => 2,
-                    'Conducteur de ligne' => 3,
-                    'Opérateur' => 4
+                    "Administrateur d'atelier" => 2,
+                    'Gestionnaire' => 3,
+                    'Conducteur de ligne' => 4
                 ]
             ])
             ->add('access', ChoiceType::class, [

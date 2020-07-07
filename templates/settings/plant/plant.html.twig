@@ -68,11 +68,10 @@
 				{% for productionLine in productionLine %}
 					<tr>
 						<td>
-							{{ productionLine.name }}
+							{{productionLine.workshop}} | {{ productionLine.name }} 
 						</td>
 						<td>
 							<form method="POST" action="{{ path('deleteLine', {id: productionLine.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette ligne ?')">
-
 								<button class="deletebtn">Supprimer</button>
 							</form>
 						</td>
@@ -94,7 +93,7 @@
 
 		<br>
 
-		{% if ops | length > 0 %}
+		{#{% if ops | length > 0 %}
 			<table>
 				<tr>
 					<th>Op :</th>
@@ -124,7 +123,7 @@
 					</td>
 				</tr>
 			</table>
-		{% endif %}
+		{% endif %}#}
 	</div>
 
 {% endblock %}

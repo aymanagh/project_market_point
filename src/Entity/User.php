@@ -66,9 +66,9 @@ class User implements UserInterface
 
     const STATUS = [
         1 => 'Administrateur',
-        2 => 'Gestionnaire',
-        3 => 'Conducteur de ligne',
-        4 => 'Opérateur'
+        2 => "Administrateur d'atelier",
+        3 => 'Gestionnaire',
+        4 => 'Conducteur de ligne'
     ];
 
     /**

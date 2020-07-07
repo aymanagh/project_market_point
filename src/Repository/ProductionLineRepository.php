@@ -19,6 +19,22 @@ class ProductionLineRepository extends ServiceEntityRepository
         parent::__construct($registry, ProductionLine::class);
     }
 
+    /**
+     * Afficher toutes les commandes par atelier
+     *
+     * @return void
+     */
+    public function findAllProductionLineByWorkshop(Object $id)
+    {
+        $qb = $this->createQueryBuilder('o')
+            ->setParameter('workshop', $id)
+            ->where('o.workshop = :workshop');
+
+        $query = $qb->getQuery();
+
+        return $query->execute();
+    }
+
     // /**
     //  * @return ProductionLine[] Returns an array of ProductionLine objects
     //  */

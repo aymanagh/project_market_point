@@ -46,37 +46,38 @@
 				</thead>
 				<tbody>
 					{% for item in items %}
-						<td>{{ item.product.reference }}</td>
-						<td>{{ item.product.designation }}</td>
-						<td>{{ item.product.price|format_currency('EUR', locale='fr') }}</td>
-						<td>{{ item.quantity }}</td>
-						<td>{{ (item.product.price * item.quantity)|format_currency('EUR', locale='fr') }}</td>
-						<td>
-							<a href="{{ path('deleteItem', {id: item.product.id}) }}">
-								<button class="deletebtn">Supprimer</button>
-							</a>
-						</td>
+							<td>{{ item.product.reference }}</td>
+							<td>{{ item.product.designation }}</td>
+							<td>{{ item.product.price|format_currency('EUR', locale='fr') }}</td>
+							<td>{{ item.quantity }}</td>
+							<td>{{ (item.product.price * item.quantity)|format_currency('EUR', locale='fr') }}</td>
+							<td>
+								<a href="{{ path('deleteItem', {id: item.product.id}) }}">
+									<button class="deletebtn">Supprimer</button>
+								</a>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+				<tfoot>
+					<tr>
+						<th colspan="3" style="text-align: right;">Prix total de la commande :</th>
+						<td>{{ total|format_currency('EUR', locale='fr') }}</td>
+						<td></td>
+						<td></td>
 					</tr>
-				{% endfor %}
-			</tbody>
-			<tfoot>
-				<tr>
-					<th colspan="3" style="text-align: right;">Prix total de la commande :
-					</th>
-					<td>{{ total|format_currency('EUR', locale='fr') }}</td>
-					<td></td>
-					<td></td>
-				</tr>
-			</tfoot>
-		</table><br>
+				</tfoot>
+			</table><br>
 
 		<form name="order_product" method="POST">
 			{{ form_start(order_form) }}
-			{{ form_row(order_form.ot, {'label': 'OT :', 'attr': {'placeholder': "Saisir l'OT correspondant"}}) }}
-			<button type="submit" class="validbtn">Valider</button>
+				{{ form_row(order_form.ot, {'label': 'OT :', 'attr': {'placeholder': "Saisir l'OT correspondant"}}) }}
+				<button type="submit" class="validbtn">Valider</button>
 			{{ form_end(order_form) }}
 		</form>
-	{% else %}
-		<p>Votre panier est vide</p>
-	{% endif %}
-</div>{% endblock body %}
+		{% else %}
+			<p>Votre panier est vide</p>
+		{% endif %}
+	</div>
+
+{% endblock body %}
