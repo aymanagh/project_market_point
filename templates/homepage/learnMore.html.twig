@@ -9,11 +9,30 @@
 	<br><br><br><br><br><br>
 
 	<div class="container">
-		<h2 class="">Mais Market Point qu'est-ce que c'est ?</h2>
-		<p>C'est une application web permettant de gérer les stocks du magasin de ligne.</p>
-		<a href="{{ path ('app_login')}}">
-			<button type="button" class="cancelbtn">Retour</button>
-		</a>
+		<h2 class="">Market Point c'est quoi ?</h2>
+		<p>C'est une application permettant de gérer les stocks du magasin de ligne.</p>
+		<h2 class="">Comment choisir mon statut ?</h2>
+		<p>Voici la description de chaque statut :</p>
+		<ul>
+			<li>
+				<strong>Administrateur d'atelier</strong>
+			</li>
+			<p>Gère intégralement son atelier auquel il est assigné.</p>
+
+			<li>
+				<strong>Gestionnaire</strong>
+			</li>
+			<p>Gère le bon maintient du stock du magasin de l'atelier.</p>
+
+			<li>
+				<strong>Conducteur de ligne</strong>
+			</li>
+			<p>Consulte et commande des pièces au magasin de l'atelier.</p>
+		</ul>
 	</div>
+
+	<a href="{{ path ('app_login')}}">
+		<button type="button" class="cancelbtn">Retour</button>
+	</a>
 
 {% endblock %}

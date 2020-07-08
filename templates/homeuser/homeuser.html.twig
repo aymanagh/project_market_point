@@ -151,7 +151,7 @@
 							        <a href="{{ path('viewProduct', {id: product.id}) }}"><img class="image_product" id="myImg" src="{{ vich_uploader_asset(product, 'imageFile') }}" alt="{{ product.imageFile }}"/></a>
 						        </td>
 						        <td class="tabProduct">
-							        <strong>Référence :</strong>{{ product.reference }}
+							        <strong>Référence :</strong> {{ product.reference }}
                                 </td>
 						        <th rowspan="2" class="tabBtn">
 							        <form method="get" action="{{ path('editProductQuantity', {id: product.id}) }}">
@@ -164,13 +164,13 @@
 			                    
                             <tr>
 				                <td class="tabProduct">
-					                <strong>Intitulé :</strong>{{ product.designation }}
+					                <strong>Intitulé :</strong> {{ product.designation }}
                                 </td>
 			                </tr>
 
 			                <tr>
 				                <td rowspan="2" class="tabProduct">
-					                <strong>Description :</strong>{{ product.description }}
+					                <strong>Description :</strong> {{ product.description }}
                                 </td>
 				                {% if access.status == 1 or access.status == 2 %}
 					                <th rowspan="2" class="tabBtn">
@@ -205,7 +205,7 @@
 
 			                <tr>
 				                <td class="tabProduct">
-					                <strong>Quantité en magasin :</strong>{{ product.amount }}pièces
+					                <strong>Quantité en magasin :</strong> {{ product.amount }} pièces
 				                </td>
 			                </tr>
 		                </table>
@@ -231,7 +231,7 @@
                                     </a>
 				                </td>
 				                <td class="tabProduct">
-					                <strong>Référence :</strong>{{ product.reference }}
+					                <strong>Référence :</strong> {{ product.reference }}
                                 </td>
 				                <th rowspan="2" class="tabBtn">
 					                <form method="get" action="{{ path('editProductQuantity', {id: product.id}) }}">
@@ -244,13 +244,13 @@
 
 			                <tr>
 				                <td class="tabProduct">
-					                <strong>Intitulé :</strong>{{ product.designation }}
+					                <strong>Intitulé :</strong> {{ product.designation }}
                                 </td>
 			                </tr>
 
 			                <tr>
 				                <td rowspan="2" class="tabProduct">
-					                <strong>Description :</strong>{{ product.description }}
+					                <strong>Description :</strong> {{ product.description }}
                                 </td>
 				                {% if access.status == 1 or access.status == 2 %}
 					                <th rowspan="2" class="tabBtn">
@@ -285,7 +285,7 @@
 
 			                <tr>
 				                <td class="tabProduct">
-					                <strong>Quantité en magasin :</strong>{{ product.amount }}pièces
+					                <strong>Quantité en magasin :</strong> {{ product.amount }} pièces
                                 </td>
 			                </tr>
 		                </table>
